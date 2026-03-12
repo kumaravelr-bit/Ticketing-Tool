@@ -1,0 +1,113 @@
+/* Page container */
+.pageContainer {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 26px;
+
+  background: #f9faf7; /* creamy white */
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #3f3f46;
+}
+
+/* Title */
+.pageTitle {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #27272a;
+}
+
+/* Table wrapper (horizontal scroll on mobile) */
+.tableWrapper {
+  overflow-x: auto;
+}
+
+/* Table base */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* Table header */
+.table thead {
+  background: #f4f4f5;
+}
+
+.table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #52525b;
+  border-bottom: 1px solid #e4e4e7;
+  white-space: nowrap;
+}
+
+/* Table body */
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e4e4e7;
+  color: #3f3f46;
+  white-space: nowrap;
+}
+
+/* Row hover */
+.table tbody tr:hover {
+  background: #fafaf9;
+}
+
+/* Status badges */
+.statusRelieved {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.statusDeactive {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Empty / loading state */
+.table td[colspan] {
+  padding: 18px;
+  color: #71717a;
+  font-size: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .pageContainer {
+    margin: 20px 14px;
+    padding: 20px;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .pageTitle {
+    font-size: 20px;
+  }
+}
