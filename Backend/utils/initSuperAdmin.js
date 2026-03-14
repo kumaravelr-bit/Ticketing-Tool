@@ -22,31 +22,34 @@ async function initSuperAdmin() {
         const hashedPassword = await bcrypt.hash(PASSWORD, 10);
 
         const [[zone]] = await db.promise().query(
-          "SELECT id FROM zones WHERE UPPER(zone_name)='HEAD OFFICE'"
+          "SELECT id FROM zones WHERE zone_name='Head Office'"
         );
         const [[branch]] = await db.promise().query(
-          "SELECT id FROM branches WHERE UPPER(branch_name)='HEAD OFFICE'"
+          "SELECT id FROM branches WHERE branch_name='Head Office'"
         );
         const [[team]] = await db.promise().query(
-          "SELECT id FROM teams WHERE UPPER(team_name)='IT'"
+          "SELECT id FROM teams WHERE team_name='IT'"
         );
         const [[designation]] = await db.promise().query(
-          "SELECT id FROM designations WHERE UPPER(designation_name)='IT'"
+          "SELECT id FROM designations WHERE designation_name='IT'"
         );
-
-        if (!zone || !branch || !team || !designation) {
-          console.error("❌ Required master data missing:");
-          console.error({ zone, branch, team, designation });
-          return;
-        }
 
         const sql = `
           INSERT INTO employees (
-            emp_id, name, email, password, dob, phone,
-            role, team_id, designation_id, manager_id,
-            branch_id, zone_id, status
-          )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            emp_id,
+            name,
+            email,
+            password,
+            dob,
+            phone,
+            role,
+            team_id,
+            designation_id,
+            manager_id,
+            branch_id,
+            zone_id,
+            status
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -59,7 +62,7 @@ async function initSuperAdmin() {
           "SUPER_ADMIN",
           team.id,
           designation.id,
-          null,
+          null,                // no manager
           branch.id,
           zone.id,
           "ACTIVE"

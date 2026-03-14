@@ -13,52 +13,44 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "_" + file.originalname);
   }
 });
-
 const upload = multer({ storage });
 
 /* ===========================
-   ZONE ROUTES
+   EMPLOYEE ROUTES
 =========================== */
-router.get("/zones", c.getZones);
-router.post("/zones", auth, permit("ZONE_CREATE"), c.createZone);
 
-/* ===========================
-   BRANCH ROUTES
-=========================== */
-router.get("/branches/by-zone/:zoneId", c.getBranchesByZone);
-router.post("/branches", auth, permit("BRANCH_CREATE"), c.createBranch);
+// Managers (Hierarchy)
+router.get("/managers", c.getManagers); // 🔹 Updated endpoint
 
-/* ===========================
-   TEAM ROUTES
-=========================== */
-router.get("/teams", c.getTeams);
-router.post("/teams", auth, permit("TEAM_CREATE"), c.createTeam);
+// Create Employee
+router.post(
+  "/employees",
+  auth,
+  permit("EMP_CREATE"),
+  upload.single("profile_photo"),
+  c.createEmployee
+);
 
-/* ===========================
-   DESIGNATION ROUTES
-=========================== */
-router.get("/designations/by-team/:teamId", c.getDesignationsByTeam);
-router.post("/designations",auth,permit("DESIGNATION_CREATE"),c.createDesignation);
+// All Employees
+router.get("/employees", auth, c.getEmployees);
 
-/* ================= EMPLOYEES ================= */
-
-/* Active */
+// Active Employees
 router.get("/active", auth, c.getActiveEmployees);
-router.get("/employees/relieved", auth, c.getRelievedEmployees);
 
-/* 🔥 SINGLE EMPLOYEE (FIXED) */
-router.get("/employees/:empId", auth, c.getEmployeeByEmpId);
+// Update Employee
+router.put(
+  "/employees/:empId",
+  auth,
+  permit("EMP_UPDATE"),
+  c.updateEmployee
+);
 
-/* Managers */
-router.get("/managers", auth, c.getManagers);
-
-/* Create */
-router.post("/employees",auth,permit("EMP_CREATE"),upload.single("profile_photo"),c.createEmployee);
-
-/* Update */
-router.put("/employees/:empId",auth,permit("EMP_UPDATE"),c.updateEmployee);
-
-/* Delete */
-router.delete("/employees/:empId",auth,permit("EMP_DELETE"),c.deleteEmployee);
+// Delete Employee
+router.delete(
+  "/employees/:empId",
+  auth,
+  permit("EMP_DELETE"),
+  c.deleteEmployee
+);
 
 module.exports = router;

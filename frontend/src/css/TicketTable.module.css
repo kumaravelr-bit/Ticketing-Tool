@@ -1,0 +1,82 @@
+.tableContainer {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.ticketTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ticketTable thead {
+  background: #2c3e50;
+  color: white;
+}
+
+.ticketTable th {
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.ticketTable td {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.ticketTable tr:hover {
+  background: #f5f8fb;
+}
+
+.ticketLink {
+  color: #0984e3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ticketLink:hover {
+  text-decoration: underline;
+}
+
+.inlineSelect {
+  padding: 6px;
+  border: 1px solid #dfe6e9;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.noTickets {
+  text-align: center;
+  padding: 20px;
+  color: #636e72;
+}
+
+.tableWrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-top: 15px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.ticketTable th {
+  cursor: pointer;
+}
