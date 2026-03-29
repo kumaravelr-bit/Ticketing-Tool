@@ -1,11 +1,18 @@
-.layout {
-  display: flex;
-  min-height: 100vh;
-  background: #f5f7fb;
+.layout{
+display:flex;
+width:100%;
+min-height:100vh;
+background:#f1f5f9;
 }
 
-.content {
-  flex: 1;
-  padding: 25px;
-  overflow-y: auto;
+.content{
+flex:1;
+margin-left:260px;
+padding:25px;
+
+transition:margin .3s ease;
+}
+
+.contentCollapsed{
+margin-left:70px;
 }

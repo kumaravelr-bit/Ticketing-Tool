@@ -121,3 +121,66 @@
   color: #fff;
   font-weight: 600;
 }
+
+.multiSelect {
+  min-height: 140px;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 6px;
+  background: #fff;
+}
+
+/* Highlight selected */
+.multiSelect option:checked {
+  background: #c2b280 !important;
+  color: #27272a !important;
+  font-weight: 600;
+}
+
+/* Hover effect */
+.multiSelect option:hover {
+  background: #eee7c8;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Back button */
+.btnBack {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #d4d4d8;
+  background: #fff;
+  color: #3f3f46;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnBack:hover {
+  background: #f4f4f5;
+}
+
+/* Update button */
+.btnPrimary {
+  flex: 1;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+
+  background: linear-gradient(135deg, #c2b280, #b6a46f);
+  color: #27272a;
+
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(194, 178, 128, 0.45);
+}

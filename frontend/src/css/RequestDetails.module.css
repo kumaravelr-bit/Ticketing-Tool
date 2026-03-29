@@ -1,0 +1,40 @@
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.message {
+  background: #e6f7ee;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.btnGroup {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 8px;
+  border-top: 1px solid #eee;
+}

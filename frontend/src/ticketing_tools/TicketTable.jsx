@@ -7,24 +7,27 @@ const TicketTable = ({
   teams,
   refreshTickets,
   onTicketClick,
-  onSort
+  onSort,
+  role,
+  isClosedPage
 }) => {
 
   return (
 
     <div className={styles.tableWrapper}>
-
       <table className={styles.ticketTable}>
 
-        <thead>
+<thead>
 <tr>
   <th onClick={() => onSort("ticket_id")}>Ticket ID</th>
   <th onClick={() => onSort("customer_id")}>Customer ID</th>
   <th>Customer Name</th>
   <th onClick={() => onSort("created_date")}>Raised Date</th>
   <th>Raised By</th>
-  <th>Assign Team</th>
-  <th>Assign To</th>
+
+  {!isClosedPage && <th>Assign Team</th>}
+  {!isClosedPage && <th>Assign To</th>}
+
   <th>Status</th>
   <th>Actions</th>
 </tr>
@@ -34,7 +37,7 @@ const TicketTable = ({
 
           {tickets.length === 0 && (
             <tr>
-              <td colSpan="8" className={styles.noTickets}>
+              <td colSpan={isClosedPage ? "7" : "9"} className={styles.noTickets}>
                 No tickets found
               </td>
             </tr>
@@ -43,12 +46,14 @@ const TicketTable = ({
           {tickets.map((ticket) => (
 
             <TicketRow
-              key={ticket.ticket_id}
-              ticket={ticket}
-              teams={teams}
-              refreshTickets={refreshTickets}
-              onTicketClick={onTicketClick}
-            />
+  key={ticket.ticket_id}
+  ticket={ticket}
+  teams={teams}
+  refreshTickets={refreshTickets}
+  onTicketClick={onTicketClick}
+  role={role}               // ✅ NEW
+  isClosedPage={isClosedPage} // ✅ NEW
+/>
 
           ))}
 

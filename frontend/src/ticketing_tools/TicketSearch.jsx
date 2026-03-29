@@ -31,103 +31,103 @@ const TicketSearch = ({
   };
 
   return (
+    <div className={styles.filters}>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
 
-<form onSubmit={handleSubmit} className={styles.searchForm}>
+        <input
+          className={styles.input}
+          name="ticket_no"
+          value={searchParams.ticket_no}
+          onChange={handleChange}
+          placeholder="Ticket No"
+        />
 
-<input
-className={styles.input}
-name="ticket_no"
-value={searchParams.ticket_no}
-onChange={handleChange}
-placeholder="Ticket No"
-/>
+        <input
+          className={styles.input}
+          type="date"
+          name="from_date"
+          value={searchParams.from_date}
+          onChange={handleChange}
+        />
 
-<input
-className={styles.input}
-type="date"
-name="from_date"
-value={searchParams.from_date}
-onChange={handleChange}
-/>
+        <input
+          className={styles.input}
+          type="date"
+          name="to_date"
+          value={searchParams.to_date}
+          onChange={handleChange}
+        />
 
-<input
-className={styles.input}
-type="date"
-name="to_date"
-value={searchParams.to_date}
-onChange={handleChange}
-/>
+        <input
+          className={styles.input}
+          name="name"
+          value={searchParams.name}
+          onChange={handleChange}
+          placeholder="Reporter Name"
+        />
 
-<input
-className={styles.input}
-name="name"
-value={searchParams.name}
-onChange={handleChange}
-placeholder="Reporter Name"
-/>
+        <input
+          className={styles.input}
+          name="customer_id"
+          value={searchParams.customer_id}
+          onChange={handleChange}
+          placeholder="Customer ID"
+        />
 
-<input
-className={styles.input}
-name="customer_id"
-value={searchParams.customer_id}
-onChange={handleChange}
-placeholder="Customer ID"
-/>
+        <select
+          className={styles.select}
+          name="branch"
+          value={searchParams.branch}
+          onChange={handleChange}
+        >
+          <option value="">Branch</option>
 
-<select
-className={styles.select}
-name="branch"
-value={searchParams.branch}
-onChange={handleChange}
->
-<option value="">Branch</option>
+          {branches.map((b) => (
+            <option key={b.branch_id} value={b.branch_id}>
+              {b.name}
+            </option>
+          ))}
 
-{branches.map((b) => (
-<option key={b.branch_id} value={b.branch_id}>
-{b.name}
-</option>
-))}
+        </select>
 
-</select>
+        <select
+          className={styles.select}
+          name="assigned_team"
+          value={searchParams.assigned_team}
+          onChange={handleChange}
+        >
+          <option value="">Team</option>
 
-<select
-className={styles.select}
-name="assigned_team"
-value={searchParams.assigned_team}
-onChange={handleChange}
->
-<option value="">Team</option>
+          {teams.map((t) => (
+            <option key={t.team_id} value={t.team_id}>
+              {t.name}
+            </option>
+          ))}
 
-{teams.map((t) => (
-<option key={t.team_id} value={t.team_id}>
-{t.name}
-</option>
-))}
+        </select>
 
-</select>
+        <select
+          className={styles.select}
+          name="type_of_ticket"
+          value={searchParams.type_of_ticket}
+          onChange={handleChange}
+        >
+          <option value="">Type</option>
 
-<select
-className={styles.select}
-name="type_of_ticket"
-value={searchParams.type_of_ticket}
-onChange={handleChange}
->
-<option value="">Type</option>
+          {ticketTypes.map((t) => (
+            <option key={t.type_id} value={t.type_id}>
+              {t.type_name}
+            </option>
+          ))}
 
-{ticketTypes.map((t) => (
-<option key={t.type_id} value={t.type_id}>
-{t.type_name}
-</option>
-))}
+        </select>
 
-</select>
+        <button type="submit" className={styles.searchButton}>
+          Search
+        </button>
 
-<button type="submit" className={styles.searchButton}>
-Search
-</button>
-
-</form>
-
+      </form>
+    </div>
   );
 };
 

@@ -1,16 +1,22 @@
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import Menu from "../components/Menu";
 import styles from "../css/Layout.module.css";
 
 export default function Layout() {
+
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <div className={styles.layout}>
 
-      {/* Sidebar */}
-      <Menu />
+      <Menu collapsed={collapsed} setCollapsed={setCollapsed} />
 
-      {/* Page Content */}
-      <div className={styles.content}>
+      <div
+        className={`${styles.content} ${
+          collapsed ? styles.contentCollapsed : ""
+        }`}
+      >
         <Outlet />
       </div>
 

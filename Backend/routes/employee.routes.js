@@ -37,6 +37,8 @@ router.get("/employees", auth, c.getEmployees);
 // Active Employees
 router.get("/active", auth, c.getActiveEmployees);
 
+
+
 // Update Employee
 router.put(
   "/employees/:empId",
@@ -51,6 +53,18 @@ router.delete(
   auth,
   permit("EMP_DELETE"),
   c.deleteEmployee
+);
+
+router.get("/employees/:empId", auth, c.getEmployeeById);
+
+// Relieved Employees
+router.get("/relieved", auth, c.getRelievedEmployees);
+
+// Reactivate Employee
+router.put(
+  "/reactivate/:empId",
+  auth,
+  c.reactivateEmployee
 );
 
 module.exports = router;

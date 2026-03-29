@@ -1,0 +1,96 @@
+.masterBox{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom:25px;
+}
+
+.masterForm{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:15px;
+}
+
+.masterForm input,
+.masterForm select{
+  padding:8px 10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+.masterForm button{
+  background:#007bff;
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table th,
+.table td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:center;
+}
+
+.actionBtn{
+  margin:0 5px;
+  cursor:pointer;
+  border:none;
+  padding:5px 10px;
+  border-radius:5px;
+}
+
+.edit{ background:#ffc107; }
+.delete{ background:#dc3545; color:#fff; }
+
+.dragItem{
+  cursor:grab;
+  background:#f9f9f9;
+}
+
+.dropZone{
+  border:2px dashed #ccc;
+  padding:10px;
+  margin-top:10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.teamFilter {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f5f7fb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 300px;
+}
+
+.teamFilter label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.teamFilter select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.teamFilter select:focus {
+  border-color: #1976d2;
+}

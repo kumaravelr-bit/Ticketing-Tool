@@ -1,26 +1,29 @@
 // frontend/src/components/NewTicket.jsx
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import api from "../services/api";
 import styles from "../css/NewTicket.module.css";
 //import Layout from "../layouts/Layout";
+import {
+  getBranches,
+  getTeams,
+  getMembers,
+  getSubtypes,
+  getTicketTypes,
+  createTicket
+} from "../services/ticketService";
 
 const NewTicket = () => {
-const navigate = useNavigate();
-
-  /* ---------------------------------------------------
-     FORM STATE
-  --------------------------------------------------- */
-
+  
   const [form, setForm] = useState({
     type_of_ticket: "",
+    subtype_of_ticket:"",
     priority: "Low",
     due_date: "",
     branch_id: "",
     assign_team: "",
     assigned_to: "",
+    customer_id:"",
     customer_name: "",
     reporter_name: "",
     landmark: "",
@@ -30,269 +33,157 @@ const navigate = useNavigate();
     more_details: "",
     status: "Opened"
   });
-
-  /* ---------------------------------------------------
-     MASTER DATA
-  --------------------------------------------------- */
-
+  
+  const [subtypes, setSubtypes] = useState([]);
   const [branches, setBranches] = useState([]);
   const [teams, setTeams] = useState([]);
   const [members, setMembers] = useState([]);
   const [ticketTypes, setTicketTypes] = useState([]);
-  const [loadingBranches, setLoadingBranches] = useState(false);
-  const [loadingTeams, setLoadingTeams] = useState(false);
-  const [loadingMembers, setLoadingMembers] = useState(false);
+
   const [createdDate, setCreatedDate] = useState(new Date());
 
-/* ---------------------------------------------------
-   INITIAL LOAD
---------------------------------------------------- */
+  /* ================= LOAD MASTER ================= */
 
-useEffect(() => {
-  fetchBranches();
-  fetchTeams();
-  fetchTicketTypes();
-}, []);
+  useEffect(() => {
+    loadMaster();
+  }, []);
 
-/* ---------------------------------------------------
-   LIVE CREATED DATE
---------------------------------------------------- */
+  const loadMaster = async () => {
+    try {
+      const [b, t, types] = await Promise.all([
+        getBranches(),
+        getTeams(),
+        getTicketTypes()
+      ]);
 
-useEffect(() => {
+      setBranches(b.data || []);
+      setTeams(t.data || []);
+      setTicketTypes(types.data || []);
+    } catch (err) {
+      toast.error("Failed to load master data");
+    }
+  };
 
-  const timer = setInterval(() => {
-    setCreatedDate(new Date());
-  }, 1000);
-
-  return () => clearInterval(timer);
-
-}, []);
-
-/* ---------------------------------------------------
-   LOAD EMPLOYEES (Branch + Team)
---------------------------------------------------- */
-
-useEffect(() => {
-
-  if (form.branch_id && form.assign_team) {
-
-    fetchMembers(form.branch_id, form.assign_team);
-
-  } else {
-
-    setMembers([]);
-
+  useEffect(() => {
+  if (!form.type_of_ticket) {
+    setSubtypes([]);
+    setForm(prev => ({ ...prev, subtype_of_ticket: "" }));
+    return;
   }
 
+  loadSubtypes();
+}, [form.type_of_ticket]);
+
+const loadSubtypes = async () => {
+  try {
+    const res = await getSubtypes(form.type_of_ticket);
+    setSubtypes(res.data || []);
+  } catch {
+    toast.error("Failed to load subtypes");
+  }
+};
+  /* ================= LIVE TIME ================= */
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCreatedDate(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  /* ================= MEMBERS ================= */
+
+useEffect(() => {
+  if (!form.branch_id || !form.assign_team) {
+    setMembers([]);
+    return;
+  }
+
+  loadMembers();
 }, [form.branch_id, form.assign_team]);
 
-/* ---------------------------------------------------
-   BRANCH CHANGE RESET
---------------------------------------------------- */
-
-useEffect(() => {
-
-  if (!form.branch_id) return;
-
-  setForm(prev => {
-    if (prev.assign_team === "" && prev.assigned_to === "") return prev;
-
-    return {
-      ...prev,
-      assign_team: "",
-      assigned_to: ""
-    };
-  });
-
-  setMembers([]);
-
-}, [form.branch_id]);
-
-/* ---------------------------------------------------
-   API CALLS
---------------------------------------------------- */
-
-const fetchBranches = async () => {
-
+const loadMembers = async () => {
   try {
-
-    setLoadingBranches(true);
-
-    const res = await api.get("/others/branches");
-
-    setBranches(res.data || []);
-
-  } catch (err) {
-
-    console.error(err);
-    toast.error("Failed to load branches");
-
-  } finally {
-
-    setLoadingBranches(false);
-
-  }
-
-};
-
-const fetchTeams = async () => {
-
-  try {
-
-    setLoadingTeams(true);
-
-    const res = await api.get("/others/teams");
-
-    setTeams(res.data || []);
-
-  } catch (err) {
-
-    toast.error("Failed to load teams");
-
-  } finally {
-
-    setLoadingTeams(false);
-
-  }
-
-};
-
-const fetchMembers = async (branchId, teamId) => {
-
-  try {
-
-    setLoadingMembers(true);
-
-    const res = await api.get(
-      `/others/employees/by-branch-team?branch_id=${branchId}&team_id=${teamId}`
-    );
-
+    const res = await getMembers(form.branch_id, form.assign_team);
     setMembers(res.data || []);
-
-  } catch (err) {
-
+  } catch {
     toast.error("Failed to load employees");
-
-  } finally {
-
-    setLoadingMembers(false);
-
   }
-
 };
 
-const fetchTicketTypes = async () => {
-
-  try {
-
-    const res = await api.get("/tickets/types");
-
-    setTicketTypes(res.data || []);
-
-  } catch (err) {
-
-    console.error(err);
-
-    toast.error("Failed to load ticket types");
-
-  }
-
-};
-
-  /* ---------------------------------------------------
-     FORM CHANGE
-  --------------------------------------------------- */
+  /* ================= CHANGE ================= */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setForm(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  /* ---------------------------------------------------
-     VALIDATION
-  --------------------------------------------------- */
+  /* ================= VALIDATION ================= */
 
   const validateForm = () => {
-
     if (!form.type_of_ticket) return "Ticket type required";
     if (!form.due_date) return "Due date required";
     if (!form.branch_id) return "Branch required";
     if (!form.assign_team) return "Team required";
     if (!form.assigned_to) return "Employee required";
-    if (!form.customer_name) return "Customer name required";
-    if (!form.reporter_name) return "Reporter name required";
+    if (!form.customer_name) return "Customer required";
+    if (!form.reporter_name) return "Reporter required";
     if (!form.address) return "Address required";
-    if (!form.contact_number1) return "Primary contact required";
-
+    if (!form.contact_number1) return "Contact required";
     return null;
-
   };
 
-  /* ---------------------------------------------------
-     SUBMIT
-  --------------------------------------------------- */
+  /* ================= SUBMIT ================= */
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const error = validateForm();
+    const error = validateForm();
+    if (error) return toast.error(error);
 
-  if (error) {
-    toast.error(error);
-    return;
-  }
+    try {
+      const res = await createTicket(form);
 
-  try {
-    const res = await api.post("/tickets", form);
-
-    if (res.data.ticket_id) {
       toast.success(`Ticket Created: ${res.data.ticket_id}`);
 
-      resetForm(); // reset form for new ticket
-    } else {
-      toast.error("Ticket creation failed");
+      resetForm();
+
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed");
     }
+  };
 
-  } catch (err) {
-    toast.error(
-      err.response?.data?.message ||
-      "Failed to create ticket"
-    );
-  }
-};
+  /* ================= RESET ================= */
 
-  /* ---------------------------------------------------
-     RESET
-  --------------------------------------------------- */
+  const resetForm = () => {
+    setForm({
+      type_of_ticket: "",
+      subtype_of_ticket:"",
+      priority: "Low",
+      due_date: "",
+      branch_id: "",
+      assign_team: "",
+      assigned_to: "",
+      customer_id:"",
+      customer_name: "",
+      reporter_name: "",
+      landmark: "",
+      address: "",
+      contact_number1: "",
+      contact_number2: "",
+      more_details: "",
+      status: "Opened"
+    });
 
- const resetForm = () => {
-  setForm({
-    type_of_ticket: "",
-    priority: "Low",
-    due_date: "",
-    branch_id: "",
-    assign_team: "",
-    assigned_to: "",
-    customer_name: "",
-    reporter_name: "",
-    landmark: "",
-    address: "",
-    contact_number1: "",
-    contact_number2: "",
-    more_details: "",
-    status: "Opened"
-  });
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-
-
-  /* ---------------------------------------------------
-     DATE FORMAT
-  --------------------------------------------------- */
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   const formattedCreatedDate = createdDate.toLocaleString();
 
@@ -302,7 +193,7 @@ const handleSubmit = async (e) => {
 
   return (
 
-<div className={styles.page}>
+ <div className={styles.page}>
 <div className={styles.container}>
 
 <h2 className={styles.title}>Create New Ticket</h2>
@@ -323,11 +214,30 @@ onChange={handleChange}
 
 {ticketTypes.map(t => (
 <option key={t.type_id} value={t.type_id}>
-  {t.type_name}
+  {t.name}
 </option>
 ))}
 
 </select>
+</div>
+
+<div className={styles.group}>
+  <label>Subtype *</label>
+
+  <select
+    name="subtype_of_ticket"
+    value={form.subtype_of_ticket || ""}
+    onChange={handleChange}
+    disabled={!form.type_of_ticket}
+  >
+    <option value="">Select Subtype</option>
+
+    {subtypes.map(s => (
+      <option key={s.subtype_id} value={s.subtype_id}>
+        {s.name}
+      </option>
+    ))}
+  </select>
 </div>
 
 {/* Priority */}
@@ -339,11 +249,9 @@ name="priority"
 value={form.priority}
 onChange={handleChange}
 >
-
 <option>Low</option>
 <option>Medium</option>
 <option>High</option>
-
 </select>
 </div>
 
@@ -358,20 +266,17 @@ value={form.due_date}
 min={new Date().toISOString().split("T")[0]}
 onChange={handleChange}
 />
-
 </div>
 
 {/* Created Date */}
 <div className={styles.group}>
 <label>Created Date</label>
-
 <input
 type="text"
 value={formattedCreatedDate}
 readOnly
 className={styles.readonly}
 />
-
 </div>
 
 {/* Branch */}
@@ -384,9 +289,7 @@ value={form.branch_id}
 onChange={handleChange}
 >
 
-<option value="">
-{loadingBranches ? "Loading..." : "Select Branch"}
-</option>
+<option value="">Select Branch</option>
 
 {branches.map(b => (
 <option key={b.branch_id} value={b.branch_id}>
@@ -408,9 +311,7 @@ onChange={handleChange}
 disabled={!form.branch_id}
 >
 
-<option value="">
-{loadingTeams ? "Loading..." : "Select Team"}
-</option>
+<option value="">Select Team</option>
 
 {teams.map(t => (
 <option key={t.team_id} value={t.team_id}>
@@ -433,9 +334,7 @@ onChange={handleChange}
 disabled={!form.assign_team}
 >
 
-<option value="">
-{loadingMembers ? "Loading..." : "Select Employee"}
-</option>
+<option value="">Select Employee</option>
 
 {members.map(m => (
 <option key={m.id} value={m.id}>
@@ -445,6 +344,18 @@ disabled={!form.assign_team}
 
 </select>
 
+</div>
+
+<div className={styles.group}>
+  <label>Customer ID</label>
+
+  <input
+    type="text"
+    name="customer_id"
+    value={form.customer_id}
+    onChange={handleChange}
+    placeholder="Enter Customer ID"
+  />
 </div>
 
 {/* Customer */}

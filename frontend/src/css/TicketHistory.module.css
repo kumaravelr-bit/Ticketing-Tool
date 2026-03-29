@@ -1,0 +1,93 @@
+/* Main container */
+.ticketHistoryContainer {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 28px;
+
+  background: #f9faf7;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #3f3f46;
+}
+
+/* Title */
+.ticketHistoryContainer h2 {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #27272a;
+}
+
+/* Form row */
+.formRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.formRow label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #52525b;
+}
+
+/* Inputs & textarea */
+.formRow input,
+.formRow textarea {
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #27272a;
+
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Textarea specific */
+.formRow textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Disabled fields */
+.formRow input:disabled,
+.formRow textarea:disabled {
+  background: #f4f4f5;
+  color: #71717a;
+  cursor: not-allowed;
+}
+
+/* Back button */
+.btnBack {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #d4d4d8;
+  background: #fff;
+  color: #3f3f46;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 10px;
+}
+
+.btnBack:hover {
+  background: #f4f4f5;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .ticketHistoryContainer {
+    margin: 20px 14px;
+    padding: 22px;
+  }
+}

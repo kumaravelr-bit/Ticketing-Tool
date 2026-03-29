@@ -3,10 +3,13 @@ const mysql = require("mysql2");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "Admin@123",
-  database: "employee list",
-  port: 3306
+  password: "Kavin@091001",
+  database: "employee_list",
+  port: 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 
-module.exports = db;
+module.exports = db.promise();

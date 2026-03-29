@@ -43,7 +43,8 @@
 
 /* Inputs & selects */
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
   padding: 10px 12px;
   border-radius: 12px;
 
@@ -56,6 +57,14 @@
   transition: all 0.2s ease;
 }
 
+/* Focus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #c2b280;
+  box-shadow: 0 0 0 2px rgba(194, 178, 128, 0.35);
+}
+
 /* File input */
 .form-group input[type="file"] {
   padding: 6px;
@@ -63,22 +72,31 @@
   border: none;
 }
 
-/* Focus (warm cream accent) */
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #c2b280;
-  box-shadow: 0 0 0 2px rgba(194, 178, 128, 0.35);
-}
-
-/* Multiple select */
+/* ✅ MULTI SELECT IMPROVED */
 .form-group select[multiple] {
-  min-height: 120px;
+  min-height: 150px;
+  max-height: 220px;
+  overflow-y: auto;
+
+  padding: 6px;
 }
 
-/* Select options */
+/* ✅ OPTION STYLE */
 .form-group select option {
-  background-color: #ffffff;
-  color: #27272a;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* ✅ SELECTED OPTION (KEY FIX) */
+.form-group select option:checked {
+  background-color: #2563eb !important; /* strong blue */
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* ✅ Hover effect */
+.form-group select option:hover {
+  background-color: #e0e7ff;
 }
 
 /* Submit button */

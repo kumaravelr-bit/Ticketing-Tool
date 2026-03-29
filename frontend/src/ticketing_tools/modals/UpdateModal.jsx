@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { updateTicket } from "../../services/ticketService";
 import { toast } from "react-toastify";
+import styles from "../../css/TicketModals.module.css";
 
 Modal.setAppElement("#root");
 
@@ -9,56 +10,55 @@ const UpdateModal = ({ open, setOpen, ticketId, refreshTickets }) => {
 
   const [comments, setComments] = useState("");
 
-  const handleSubmit = async () => {
+const handleSubmit = async () => {
 
-    if (!comments) {
+  if (!comments.trim()) {
+    toast.error("Enter comments");
+    return;
+  }
 
-      toast.error("Enter comments");
+  try {
+    await updateTicket(ticketId, { comments });
 
-      return;
+    toast.success("Ticket updated");
 
-    }
+    setComments("");   // 🔥 CLEAR INPUT
+    setOpen(false);
+    refreshTickets();
 
-    try {
+  } catch (err) {
 
-      await updateTicket(ticketId, { comments });
+    console.error("UPDATE ERROR:", err.response?.data || err);
 
-      toast.success("Ticket updated");
-
-      setOpen(false);
-
-      refreshTickets();
-
-    } catch {
-
-      toast.error("Update failed");
-
-    }
-
-  };
+    toast.error(err.response?.data?.message || "Update failed");
+  }
+};
 
   return (
+<Modal
+  isOpen={open}
+  onRequestClose={() => setOpen(false)}
+  className={styles.modal}
+  overlayClassName={styles.overlay}
+  shouldFocusAfterRender={false}
+  shouldCloseOnOverlayClick={true}
+>
 
-    <Modal isOpen={open} onRequestClose={() => setOpen(false)}>
-
-      <h2>Update Ticket</h2>
+      <div className={styles.header}>Update Ticket</div>
 
       <textarea
         placeholder="Comments"
         value={comments}
         onChange={(e) => setComments(e.target.value)}
+        className={styles.textarea}
       />
 
-      <button onClick={handleSubmit}>
-        Submit
-      </button>
-
-      <button onClick={() => setOpen(false)}>
-        Cancel
-      </button>
+      <div className={styles.actions}>
+        <button className={`${styles.btn} ${styles.primary}`} onClick={handleSubmit}>Submit</button>
+        <button className={`${styles.btn} ${styles.cancel}`} onClick={() => setOpen(false)}>Cancel</button>
+      </div>
 
     </Modal>
-
   );
 };
 

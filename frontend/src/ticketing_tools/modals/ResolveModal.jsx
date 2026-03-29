@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { resolveTicket } from "../../services/ticketService";
 import { toast } from "react-toastify";
+import styles from "../../css/TicketModals.module.css";
 
 Modal.setAppElement("#root");
 
@@ -18,55 +19,49 @@ const ResolveModal = ({ open, setOpen, ticketId, refreshTickets }) => {
     }
 
     try {
-
-      await resolveTicket(ticketId, {
-        action_type: actionType,
-        comments
-      });
-
+      await resolveTicket(ticketId, { action_type: actionType, comments });
       toast.success("Ticket resolved");
-
       setOpen(false);
-
       refreshTickets();
-
     } catch {
-
       toast.error("Resolve failed");
-
     }
   };
 
   return (
-    <Modal isOpen={open} onRequestClose={() => setOpen(false)}>
+<Modal
+  isOpen={open}
+  onRequestClose={() => setOpen(false)}
+  className={styles.modal}
+  overlayClassName={styles.overlay}
+  shouldFocusAfterRender={false}
+  shouldCloseOnOverlayClick={true}
+>
 
-      <h2>Resolve Ticket</h2>
+      <div className={styles.header}>Resolve Ticket</div>
 
       <select
         value={actionType}
         onChange={(e) => setActionType(e.target.value)}
+        className={styles.select}
       >
-
         <option value="">Select Action</option>
         <option value="Issue Resolved">Issue Resolved</option>
         <option value="Escalate">Escalate</option>
         <option value="Cannot Reproduce">Cannot Reproduce</option>
-
       </select>
 
       <textarea
         placeholder="Comments"
         value={comments}
         onChange={(e) => setComments(e.target.value)}
+        className={styles.textarea}
       />
 
-      <button onClick={handleSubmit}>
-        Submit
-      </button>
-
-      <button onClick={() => setOpen(false)}>
-        Cancel
-      </button>
+      <div className={styles.actions}>
+        <button className={`${styles.btn} ${styles.primary}`} onClick={handleSubmit}>Submit</button>
+        <button className={`${styles.btn} ${styles.cancel}`} onClick={() => setOpen(false)}>Cancel</button>
+      </div>
 
     </Modal>
   );
