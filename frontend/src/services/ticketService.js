@@ -5,9 +5,13 @@ export const getBranches = () => api.get("/others/branches");
 export const getTeams = () => api.get("/others/teams");
 
 // FIX THIS (IMPORTANT)
-export const getMembers = (branchId, teamId) =>
-  api.get(`/others/employees/by-branch-team`, {
-    params: { branch_id: branchId, team_id: teamId }
+export const getMembers = (branchId, teamId, options = {}) =>
+  api.get(`/tickets/employees/by-branch-team`, {
+    params: {
+      branch_id: branchId,
+      team_id: teamId,
+      ...(options.context ? { context: options.context } : {})
+    }
   });
 
 export const getTicketTypes = () =>
@@ -17,7 +21,9 @@ export const searchOpenedTickets = (params) =>
   api.post("/tickets/opened/search", params);
 
 export const createTicket = (data) =>
-  api.post("/tickets", data);
+  api.post("/tickets", data, data instanceof FormData
+    ? { headers: { "Content-Type": "multipart/form-data" } }
+    : undefined);
 
 export const moveTicket = (ticketId, data) =>
   api.post(`/tickets/${ticketId}/move`, data);
@@ -36,8 +42,17 @@ export const getTicketHistory = (ticketId) => {
   return api.get(`/tickets/${ticketId}/history`);
 };
 
+export const verifyTicket = (ticketId) =>
+  api.post(`/tickets/${ticketId}/verify`);
+
 export const getSubtypes = (typeId) =>
   api.get(`/tickets/subtypes/${typeId}`);
 
 export const searchClosedTickets = (params) =>
   api.post("/tickets/closed/search", params);
+
+export const exportOpenedTickets = (params) =>
+  api.post("/tickets/opened/export", params, { responseType: "blob" });
+
+export const exportClosedTickets = (params) =>
+  api.post("/tickets/closed/export", params, { responseType: "blob" });

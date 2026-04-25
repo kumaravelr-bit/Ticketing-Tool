@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payslip - {{employeeName}}</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: #ffffff;
+      color: #111111;
+      font-size: 12px;
+      padding: 50px 50px;
+    }
+
+    .payslip-wrapper {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      border: 1px solid #5f5f5f;
+      /* ✅ only one outer border */
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    /* ============================= */
+    /* ✅ CLEAN SINGLE BORDER SYSTEM */
+    /* ============================= */
+
+    td,
+    th {
+      border: 1px solid #6f6f6f;
+      padding: 5px 8px;
+      /* ✅ improved spacing */
+      vertical-align: middle;
+      line-height: 1;
+      word-break: break-word;
+    }
+
+    /* 🔥 REMOVE ALL OUTER EDGES (IMPORTANT) */
+    table tr:first-child td,
+    table tr:first-child th {
+      border-top: 0;
+    }
+
+    table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    table td:first-child,
+    table th:first-child {
+      border-left: 0;
+    }
+
+    table td:last-child,
+    table th:last-child {
+      border-right: 0;
+    }
+
+    /* ============================= */
+    /* HEADER */
+    /* ============================= */
+
+    .header-table {
+      table-layout: fixed;
+    }
+
+    .company-block {
+      width: 66%;
+      text-align: center;
+    }
+
+    .logo-cell {
+      width: 34%;
+      text-align: center;
+      vertical-align: middle;
+      padding: 8px 6px;
+    }
+
+    .company-name {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .company-address {
+      font-size: 11px;
+      line-height: 1.3;
+      padding: 4px 0;
+    }
+
+    .logo-cell img {
+      max-width: 115px;
+      max-height: 55px;
+      object-fit: contain;
+    }
+
+    /* ============================= */
+    /* TITLE */
+    /* ============================= */
+
+    .title-row td {
+      background: #a6a6a6;
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      padding: 6px 0;
+      /* improved */
+    }
+
+    /* ============================= */
+    /* META TABLE */
+    /* ============================= */
+
+    .meta-table td {
+      font-size: 11.5px;
+      padding: 5px 8px;
+      /* improved */
+    }
+
+    .meta-label-left {
+      width: 24%;
+      font-weight: 600;
+    }
+
+    .meta-value-left {
+      width: 22%;
+    }
+
+    .meta-label-right {
+      width: 19%;
+      font-weight: 600;
+    }
+
+    .meta-value-right {
+      width: 35%;
+    }
+
+    /* ============================= */
+    /* EARNINGS */
+    /* ============================= */
+
+    .earnings-table th,
+    .earnings-table td {
+      font-size: 11.5px;
+      padding: 5px 8px;
+      /* improved */
+    }
+
+    .earnings-table th {
+      background: #a6a6a6;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* column alignment */
+    .col-earn-name {
+      width: 24%;
+      text-align: left;
+    }
+
+    .col-earn-amt {
+      width: 22%;
+      text-align: right;
+    }
+
+    .col-ded-name {
+      width: 19%;
+      text-align: left;
+    }
+
+    .col-ded-amt {
+      width: 35%;
+      text-align: right;
+    }
+
+    .amount {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    .total-row td {
+      font-weight: 600;
+    }
+
+    /* ============================= */
+    /* NET PAY */
+    /* ============================= */
+
+    .netpay-row td {
+      background: #a6a6a6;
+      font-weight: 700;
+      font-size: 11.5px;
+      padding: 6px 8px;
+    }
+
+    .netpay-label {
+      width: 24%;
+      text-align: left;
+    }
+
+    .netpay-value {
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* ============================= */
+    /* FOOTER */
+    /* ============================= */
+
+    .footer-row td {
+      background: #a6a6a6;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="payslip-wrapper">
+
+    <!-- HEADER -->
+    <table class="header-table">
+      <tr>
+        <td colspan="3" class="company-block company-name">INFONET COMM ENTERPRISES PVT LTD</td>
+        <td rowspan="3" class="logo-cell">
+          <img src="{{logoBase64}}" alt="Infonet Logo" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class="company-block company-address">
+          468/10,Balaji Nagar,Tiruchengode Road,Opp Collector Office,
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class="company-block company-address">
+          Namakkal-637003
+        </td>
+      </tr>
+    </table>
+
+    <!-- TITLE -->
+    <table class="title-row">
+      <tr>
+        <td>Payslip for the Month of {{payMonth}}</td>
+      </tr>
+    </table>
+
+    <!-- EMPLOYEE DETAILS -->
+    <table class="meta-table">
+      <tr>
+        <td class="meta-label-left">Employee ID</td>
+        <td class="meta-value-left">{{employeeId}}</td>
+        <td class="meta-label-right">Employee Name</td>
+        <td class="meta-value-right">{{employeeName}}</td>
+      </tr>
+      <tr>
+        <td class="meta-label-left">Department</td>
+        <td class="meta-value-left">{{department}}</td>
+        <td class="meta-label-right">Designation</td>
+        <td class="meta-value-right">{{designation}}</td>
+      </tr>
+      <tr>
+        <td class="meta-label-left">DOJ</td>
+        <td class="meta-value-left">{{doj}}</td>
+        <td class="meta-label-right">Location</td>
+        <td class="meta-value-right">{{location}}</td>
+      </tr>
+      <tr>
+        <td class="meta-label-left">LOP Days</td>
+        <td class="meta-value-left">{{lopDays}}</td>
+        <td class="meta-label-right">Salary Days</td>
+        <td class="meta-value-right">{{salaryDays}}</td>
+      </tr>
+      <tr>
+        <td class="meta-label-left"></td>
+        <td class="meta-value-left"></td>
+        <td class="meta-label-right">Account Number</td>
+        <td class="meta-value-right">{{accountNumber}}</td>
+      </tr>
+    </table>
+
+    <!-- EARNINGS / DEDUCTIONS -->
+    <table class="earnings-table">
+      <thead>
+        <tr>
+          <th class="col-earn-name">Earnings</th>
+          <th class="col-earn-amt">Amount</th>
+          <th class="col-ded-name">Deductions</th>
+          <th class="col-ded-amt">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-earn-name">Basic Pay</td>
+          <td class="col-earn-amt amount">{{basicPay}}</td>
+          <td class="col-ded-name">ESI</td>
+          <td class="col-ded-amt amount">{{esi}}</td>
+        </tr>
+        <tr>
+          <td>HRA</td>
+          <td class="amount">{{hra}}</td>
+          <td>PF</td>
+          <td class="amount">{{pf}}</td>
+        </tr>
+        <tr>
+          <td>Other Allowance</td>
+          <td class="amount">{{otherAllowance}}</td>
+          <td>Insurance</td>
+          <td class="amount">{{insurance}}</td>
+        </tr>
+        <tr>
+          <td>Food Allowance</td>
+          <td class="amount">{{foodAllowance}}</td>
+          <td>Uniform</td>
+          <td class="amount">{{uniform}}</td>
+        </tr>
+        <tr>
+          <td>Vehicle Allowance</td>
+          <td class="amount">{{vehicleAllowance}}</td>
+          <td>Special Deductions</td>
+          <td class="amount">{{specialDeductions}}</td>
+        </tr>
+        <tr>
+          <td>OT</td>
+          <td class="amount">{{ot}}</td>
+          <td>Salary Advance</td>
+          <td class="amount">{{salaryAdvance}}</td>
+        </tr>
+        <tr>
+          <td>Position Allowance</td>
+          <td class="amount">{{positionAllowance}}</td>
+          <td>TDS</td>
+          <td class="amount">{{tds}}</td>
+        </tr>
+        <tr>
+          <td>Arrear</td>
+          <td class="amount">{{arrear}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Holiday Pay</td>
+          <td class="amount">{{holidayPay}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="total-row">
+          <td>Total Earnings</td>
+          <td class="amount">{{totalEarnings}}</td>
+          <td>Total Deductions</td>
+          <td class="amount">{{totalDeductions}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- NET PAY + FOOTER -->
+    <table class="net-table">
+      <tr class="netpay-row">
+        <td class="netpay-label">Net Pay</td>
+        <td class="netpay-value" colspan="3">{{netPay}}/-</td>
+      </tr>
+      <tr class="footer-row">
+        <td colspan="4">"Computer Generated Payslip,Signature not required"</td>
+      </tr>
+    </table>
+
+  </div>
+</body>
+
+</html>

@@ -1,70 +1,53 @@
-const router = require("express").Router();
-const multer = require("multer");
-const auth = require("../middleware/auth");
-const permit = require("../middleware/permission");
-const c = require("../controllers/employee.controller");
+const router        = require("express").Router();
+const auth          = require("../middleware/auth");
+const permit        = require("../middleware/permission");
+const { requireRole } = require("../middleware/access");
+const c             = require("../controllers/employee.controller");
+const bulk          = require("../controllers/employee.bulk.controller");
+const uploadProfile = require("../middleware/uploadProfile");
+const uploadSpreadsheet = require("../middleware/uploadSpreadsheet");
 
-/* ===========================
-   FILE UPLOAD CONFIG
-=========================== */
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "_" + file.originalname);
-  }
-});
-const upload = multer({ storage });
+/* ── Managers dropdown ── */
+router.get("/managers",       auth, c.getManagers);
+router.get("/options",        auth, (req, res) => res.json({}));
+router.get("/bulk-upload/template", auth, permit("EMP_CREATE"), bulk.downloadEmployeeBulkTemplate);
+router.post(
+  "/bulk-upload",
+  auth, permit("EMP_CREATE"),
+  uploadSpreadsheet.single("file"),
+  bulk.bulkUploadEmployees
+);
 
-/* ===========================
-   EMPLOYEE ROUTES
-=========================== */
-
-// Managers (Hierarchy)
-router.get("/managers", c.getManagers); // 🔹 Updated endpoint
-
-// Create Employee
+/* ── Create ── */
 router.post(
   "/employees",
-  auth,
-  permit("EMP_CREATE"),
-  upload.single("profile_photo"),
+  auth, permit("EMP_CREATE"),
+  uploadProfile.single("profile_photo"),
   c.createEmployee
 );
 
-// All Employees
-router.get("/employees", auth, c.getEmployees);
-
-// Active Employees
-router.get("/active", auth, c.getActiveEmployees);
-
-
-
-// Update Employee
+/* ── Update ── */
 router.put(
   "/employees/:empId",
-  auth,
-  permit("EMP_UPDATE"),
+  auth, permit("EMP_UPDATE"),
+  uploadProfile.single("profile_photo"),
   c.updateEmployee
 );
 
-// Delete Employee
-router.delete(
-  "/employees/:empId",
-  auth,
-  permit("EMP_DELETE"),
-  c.deleteEmployee
-);
+/* ── Delete (soft, SUPER_ADMIN only) ── */
+router.delete("/employees/:empId", auth, requireRole("SUPER_ADMIN"), c.deleteEmployee);
 
-router.get("/employees/:empId", auth, c.getEmployeeById);
+/* ── Reactivate ── */
+router.put("/reactivate/:empId", auth, c.reactivateEmployee);
 
-// Relieved Employees
-router.get("/relieved", auth, c.getRelievedEmployees);
+/* ── List ── */
+router.get("/employees",         auth, c.getEmployees);
+router.get("/active",            auth, c.getActiveEmployees);
+router.get("/relieved",          auth, c.getRelievedEmployees);
+router.get("/employees/:empId",  auth, c.getEmployeeById);
 
-// Reactivate Employee
-router.put(
-  "/reactivate/:empId",
-  auth,
-  c.reactivateEmployee
-);
+/* ── Export (same scope as list, no LIMIT) ── */
+router.get("/export/active",   auth, c.exportActiveEmployees);
+router.get("/export/relieved", auth, c.exportRelievedEmployees);
 
 module.exports = router;

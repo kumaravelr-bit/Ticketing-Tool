@@ -1,0 +1,141 @@
+.searchContainer {
+  background: transparent;
+  padding: 0 0 18px;
+  border-radius: 0;
+  margin-bottom: 18px;
+  box-shadow: none;
+}
+
+.searchForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.input,
+.select {
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--surface-hover);
+  transition: 0.2s;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-card);
+  outline: none;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+}
+
+.searchButton,
+.exportButton,
+.resetButton {
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+}
+
+.searchButton {
+  background: var(--btn-search-bg);
+  color: var(--btn-search-text);
+}
+
+.exportButton {
+  background: var(--btn-success-bg);
+  color: var(--btn-success-text);
+}
+
+.resetButton {
+  background: var(--btn-muted-bg);
+  color: var(--btn-muted-text);
+}
+
+.searchButton:hover {
+  background: var(--btn-search-hover);
+  transform: translateY(-1px);
+}
+
+.exportButton:hover {
+  background: var(--btn-success-hover);
+  transform: translateY(-1px);
+}
+
+.resetButton:hover {
+  background: var(--btn-muted-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .searchForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .buttonGroup {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .searchButton,
+  .exportButton,
+  .resetButton {
+    flex: 1 1 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchContainer {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .searchForm {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .searchButton,
+  .exportButton,
+  .resetButton {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .searchForm {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}

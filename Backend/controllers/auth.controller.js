@@ -13,8 +13,20 @@ exports.login = async (req, res) => {
     }
 
     const [rows] = await db.query(
-      `SELECT emp_id, password, role, status 
-       FROM employees WHERE emp_id = ? LIMIT 1`,
+      `SELECT
+        e.emp_id,
+        e.name,
+        e.password,
+        e.role,
+        e.status,
+        e.profile_photo,
+        t.team_name,
+        d.designation_name
+      FROM employees e
+      LEFT JOIN teams t ON e.team_id = t.id
+      LEFT JOIN designations d ON e.designation_id = d.id
+      WHERE e.emp_id = ?
+      LIMIT 1`,
       [empId]
     );
 
@@ -49,9 +61,14 @@ exports.login = async (req, res) => {
       token,
       role: user.role,
       emp_id: user.emp_id,
-      expiresIn: 7200
+      name: user.name || "",
+      team: user.team_name || "",
+      team_name: user.team_name || "",
+      designation: user.designation_name || "",
+      designation_name: user.designation_name || "",
+      profile_photo: user.profile_photo || null,
+      expiresIn: 7200,
     });
-
   } catch (err) {
     console.error("Login Error:", err);
     res.status(500).json({ message: "Server error" });
@@ -74,7 +91,6 @@ exports.sendResetOTP = async (req, res) => {
       [empId]
     );
 
-    // 🔒 DO NOT REVEAL USER EXISTENCE
     if (!rows.length || rows[0].email !== email) {
       return res.json({
         message: "If details are correct, OTP sent"
@@ -83,7 +99,6 @@ exports.sendResetOTP = async (req, res) => {
 
     const user = rows[0];
 
-    // ⛔ RESEND BLOCK (60 sec)
     if (user.otp_last_sent) {
       const diff = (new Date() - new Date(user.otp_last_sent)) / 1000;
       if (diff < 60) {
@@ -108,7 +123,6 @@ exports.sendResetOTP = async (req, res) => {
     await sendOTP(email, otp);
 
     res.json({ message: "OTP sent successfully" });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error sending OTP" });
@@ -155,7 +169,6 @@ exports.verifyOTP = async (req, res) => {
     }
 
     res.json({ message: "OTP verified" });
-
   } catch (err) {
     res.status(500).json({ message: "Error verifying OTP" });
   }
@@ -185,8 +198,119 @@ exports.resetPassword = async (req, res) => {
     );
 
     res.json({ message: "Password reset successful" });
-
   } catch (err) {
     res.status(500).json({ message: "Error resetting password" });
+  }
+};
+
+/* ================= CHANGE PASSWORD ================= */
+exports.changePassword = async (req, res) => {
+  try {
+    const { emp_id } = req.user || {};
+    const { currentPassword, password } = req.body || {};
+
+    if (!emp_id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    if (!currentPassword) {
+      return res.status(400).json({ message: "Current password is required" });
+    }
+
+    if (!password || password.length < 6) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters",
+      });
+    }
+
+    const [rows] = await db.query(
+      `SELECT password
+       FROM employees
+       WHERE emp_id = ?
+       LIMIT 1`,
+      [emp_id]
+    );
+
+    if (!rows.length) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isCurrentPasswordValid = await bcrypt.compare(
+      currentPassword,
+      rows[0].password
+    );
+
+    if (!isCurrentPasswordValid) {
+      return res.status(400).json({
+        message:
+          "Incorrect current password. Use the forgot password option from login if needed.",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [result] = await db.query(
+      `UPDATE employees
+       SET password = ?,
+           reset_otp = NULL,
+           otp_expiry = NULL,
+           otp_attempts = 0
+       WHERE emp_id = ?`,
+      [hashedPassword, emp_id]
+    );
+
+    if (!result.affectedRows) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error("Change Password Error:", err);
+    res.status(500).json({ message: "Error changing password" });
+  }
+};
+
+/* ================= VERIFY CURRENT PASSWORD ================= */
+exports.verifyCurrentPassword = async (req, res) => {
+  try {
+    const { emp_id } = req.user || {};
+    const { currentPassword } = req.body || {};
+
+    if (!emp_id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    if (!currentPassword) {
+      return res.status(400).json({ message: "Current password is required" });
+    }
+
+    const [rows] = await db.query(
+      `SELECT password
+       FROM employees
+       WHERE emp_id = ?
+       LIMIT 1`,
+      [emp_id]
+    );
+
+    if (!rows.length) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isCurrentPasswordValid = await bcrypt.compare(
+      currentPassword,
+      rows[0].password
+    );
+
+    if (!isCurrentPasswordValid) {
+      return res.status(400).json({
+        message:
+          "Incorrect current password. Use the forgot password option from login if needed.",
+      });
+    }
+
+    res.json({ message: "Current password verified" });
+  } catch (err) {
+    console.error("Verify Current Password Error:", err);
+    res.status(500).json({ message: "Error verifying current password" });
   }
 };

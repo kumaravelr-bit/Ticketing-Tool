@@ -1,0 +1,287 @@
+:root {
+  --font-sans: "Segoe UI Variable", "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --bg-main: #f7f7f5;
+  --bg-card: #ffffff;
+  --bg-card-solid: #ffffff;
+  --bg-elevated: #ffffff;
+  --text-main: #000000;
+  --text-secondary: #000000;
+  --text-muted: #4f4f4f;
+
+  --sidebar-bg: linear-gradient(180deg, #ffffff, #fafaf9 46%, #f1f1ef 100%);
+  --app-backdrop: linear-gradient(180deg, #fbfbfa 0%, #f3f3f1 100%);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --surface-muted: #f0f0ee;
+  --surface-hover: #f6f6f4;
+  --surface-disabled: #ebebe8;
+  --surface-overlay: rgba(26, 23, 19, 0.42);
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 16px 36px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 24px 54px rgba(0, 0, 0, 0.14);
+
+  --accent-primary: #000000;
+  --accent-primary-strong: #000000;
+  --accent-primary-soft: rgba(0, 0, 0, 0.08);
+  --accent-gradient: linear-gradient(135deg, #181818, #000000);
+  --accent-contrast: #ffffff;
+
+  --btn-primary-bg: #000000;
+  --btn-primary-hover: #222222;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #ececeb;
+  --btn-secondary-hover: #dfdfdc;
+  --btn-secondary-text: #000000;
+  --btn-search-bg: #e5e5e3;
+  --btn-search-hover: #d8d8d5;
+  --btn-search-text: #000000;
+  --btn-muted-bg: #cb4740;
+  --btn-muted-hover: #b73b35;
+  --btn-muted-text: #ffffff;
+  --btn-success-bg: #198754;
+  --btn-success-hover: #157347;
+  --btn-success-text: #ffffff;
+  --btn-danger-bg: #c23c35;
+  --btn-danger-hover: #ac2f29;
+  --btn-danger-text: #ffffff;
+  --btn-warning-bg: linear-gradient(135deg, #e9a83b, #cc7d18);
+  --btn-warning-hover: linear-gradient(135deg, #f1b24b, #ba6d0e);
+  --btn-warning-text: #2e1b02;
+  --btn-info-bg: linear-gradient(135deg, #53789f, #355776);
+  --btn-info-hover: linear-gradient(135deg, #6288b0, #294a68);
+  --btn-info-text: #f7fbff;
+  --selected-bg: #d4d9e1;
+  --selected-text: #6b6e76;
+  --selected-border: rgba(107, 110, 118, 0.42);
+
+  --success-bg: #e6f5ed;
+  --success-text: #177144;
+  --warning-bg: #f8ecd3;
+  --warning-text: #8f5c12;
+  --danger-bg: #fde8e6;
+  --danger-text: #b33c34;
+  --info-bg: #edf2f7;
+  --info-text: #3f5f80;
+
+  --input-bg: #ffffff;
+  --input-bg-focus: #ffffff;
+  --focus-ring: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-main: #1a1d21;
+  --bg-card: #23272c;
+  --bg-card-solid: #272c32;
+  --bg-elevated: #30363d;
+  --text-main: #ffffff;
+  --text-secondary: #edf1f5;
+  --text-muted: #b7c0c9;
+
+  --sidebar-bg: linear-gradient(180deg, #22272e, #262c33 44%, #2c333b 100%);
+  --app-backdrop: linear-gradient(180deg, #1c2025 0%, #242a31 100%);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --surface-muted: #2c3137;
+  --surface-hover: #343a41;
+  --surface-disabled: #3b424a;
+  --surface-overlay: rgba(14, 18, 24, 0.72);
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --shadow-medium: 0 18px 42px rgba(0, 0, 0, 0.3);
+  --shadow-strong: 0 26px 60px rgba(0, 0, 0, 0.42);
+
+  --accent-primary: #f4f7fa;
+  --accent-primary-strong: #ffffff;
+  --accent-primary-soft: rgba(244, 247, 250, 0.12);
+  --accent-gradient: linear-gradient(135deg, #353c44, #22272e);
+  --accent-contrast: #ffffff;
+
+  --btn-primary-bg: #39414a;
+  --btn-primary-hover: #454e58;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #353c44;
+  --btn-secondary-hover: #404852;
+  --btn-secondary-text: #ffffff;
+  --btn-search-bg: #3a424b;
+  --btn-search-hover: #47505a;
+  --btn-search-text: #ffffff;
+  --btn-muted-bg: #c14d48;
+  --btn-muted-hover: #d05a55;
+  --btn-muted-text: #fff9f8;
+  --btn-success-bg: #1f9c64;
+  --btn-success-hover: #27af73;
+  --btn-success-text: #f6fffb;
+  --btn-danger-bg: #b44747;
+  --btn-danger-hover: #c85656;
+  --btn-danger-text: #fff8f7;
+  --btn-warning-bg: linear-gradient(135deg, #d39a3d, #9d6418);
+  --btn-warning-hover: linear-gradient(135deg, #e1aa4a, #af711d);
+  --btn-warning-text: #170f03;
+  --btn-info-bg: linear-gradient(135deg, #5e86ad, #35597c);
+  --btn-info-hover: linear-gradient(135deg, #6d94ba, #3d6488);
+  --btn-info-text: #f5fbff;
+  --selected-bg: #4b5460;
+  --selected-text: #f0f1f2;
+  --selected-border: rgba(240, 241, 242, 0.32);
+
+  --success-bg: rgba(32, 117, 72, 0.2);
+  --success-text: #88d3a7;
+  --warning-bg: rgba(164, 117, 44, 0.24);
+  --warning-text: #f0c97d;
+  --danger-bg: rgba(165, 67, 67, 0.24);
+  --danger-text: #f2a7a2;
+  --info-bg: rgba(76, 109, 144, 0.26);
+  --info-text: #b7d3ef;
+
+  --input-bg: #252a31;
+  --input-bg-focus: #2d333b;
+  --focus-ring: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background: var(--app-backdrop);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--accent-primary-soft);
+  color: var(--text-main);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.card,
+.formContainer {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+}
+
+input,
+select,
+textarea {
+  background: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+form {
+  color: var(--text-main);
+}
+
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  color: inherit;
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .formContainer {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-medium);
+}
+
+option {
+  background: var(--bg-card-solid);
+  color: var(--text-main);
+}
+
+option:checked,
+option[selected] {
+  background: var(--selected-bg) !important;
+  color: var(--selected-text) !important;
+  box-shadow: inset 0 0 0 1px var(--selected-border);
+}
+
+[data-theme="dark"] table,
+[data-theme="dark"] thead,
+[data-theme="dark"] tbody,
+[data-theme="dark"] tr,
+[data-theme="dark"] th,
+[data-theme="dark"] td,
+[data-theme="dark"] label,
+[data-theme="dark"] span,
+[data-theme="dark"] p,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--text-main);
+}
+
+[data-theme="dark"] .tableWrapper,
+[data-theme="dark"] table {
+  color: var(--text-main);
+}
+
+input::placeholder {
+  color: var(--text-secondary);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+button {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.Toastify__toast-container {
+  font-family: var(--font-sans);
+}
+
+.Toastify__toast {
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card-solid);
+  color: var(--text-main);
+  box-shadow: var(--shadow-medium);
+}
+
+.Toastify__toast-body {
+  color: inherit;
+}
+
+.Toastify__close-button {
+  color: var(--text-secondary);
+}
+
+.Toastify__progress-bar {
+  background: var(--accent-gradient);
+}

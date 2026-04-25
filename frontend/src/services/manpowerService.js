@@ -1,4 +1,4 @@
-import api from "./api";
+import api, { cachedGet } from "./api";
 
 /* ================= MANPOWER ================= */
 
@@ -8,7 +8,7 @@ export const createManpowerRequest = (data) =>
 
 // SUMMARY
 export const getManpowerSummary = () =>
-  api.get("/manpower/home-summary");
+  cachedGet("/manpower/home-summary", { ttl: 20 * 1000 });
 
 // LIST
 export const getManpowerRequests = (params) =>
@@ -17,3 +17,11 @@ export const getManpowerRequests = (params) =>
 // DETAIL
 export const getManpowerById = (id) =>
   api.get(`/manpower/requests/${id}`);
+
+// ✅ UPDATE REQUEST (EDIT)
+export const updateManpowerRequest = (id, data) =>
+  api.put(`/manpower/requests/${id}`, data);
+
+// ✅ ACTION (APPROVE / REJECT)  ← 🔥 THIS WAS MISSING
+export const updateManpowerAction = (id, type, data) =>
+  api.put(`/manpower/requests/${id}/${type}`, data);

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const auth = require("../middleware/auth");
 const ticket = require("../controllers/ticket.controller");
+const uploadTicketSnapshot = require("../middleware/uploadTicketSnapshot");
 
 /* ================== TICKET TYPES ================== */
 
@@ -34,14 +35,19 @@ router.delete("/subtypes/:id", auth, ticket.deleteSubtype);
 
 /* ================== EXISTING ================== */
 
-router.post("/", auth, ticket.createTicket);
+router.post("/", auth, uploadTicketSnapshot.single("issue_snapshot"), ticket.createTicket);
 router.post("/opened/search", auth, ticket.searchOpenedTickets);
+router.post("/opened/export", auth, ticket.exportOpenedTickets);
 router.get("/employees/by-branch-team", auth, ticket.getEmployeesByBranchTeam);
 router.post("/:ticketId/move", auth, ticket.moveTicket);
 
+router.post("/:ticketId/resolve", auth, ticket.resolveTicket);
 router.post("/:ticketId/update", auth, ticket.updateTicket);
+router.post("/:ticketId/verify", auth, ticket.verifyTicket);
 router.get("/:ticketId/history", auth, ticket.getTicketHistory);
+router.get("/attachments/:attachmentId/download", auth, ticket.downloadTicketAttachment);
 router.post("/close/:ticketId", auth, ticket.closeTicket);
 router.post("/closed/search", auth, ticket.searchClosedTickets);
+router.post("/closed/export", auth, ticket.exportClosedTickets);
 
 module.exports = router;

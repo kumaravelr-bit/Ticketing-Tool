@@ -1,0 +1,161 @@
+/* Main container */
+.ticketHistoryContainer {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 28px;
+
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+}
+
+/* Title */
+.ticketHistoryContainer h2 {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+/* Form row */
+.formRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.formRow label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Inputs & textarea */
+.formRow input,
+.formRow textarea {
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Textarea specific */
+.formRow textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Disabled fields */
+.formRow input:disabled,
+.formRow textarea:disabled {
+  background: var(--surface-disabled);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Back button */
+.btnBack {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 10px;
+}
+
+.btnBack:hover {
+  background: var(--surface-muted);
+}
+
+.attachmentList {
+  display: grid;
+  gap: 14px;
+}
+
+.attachmentCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.attachmentPreview {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-disabled);
+}
+
+.attachmentMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attachmentName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.attachmentTime {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.attachmentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.attachmentBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.attachmentBtn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .ticketHistoryContainer {
+    margin: 20px 14px;
+    padding: 22px;
+  }
+}

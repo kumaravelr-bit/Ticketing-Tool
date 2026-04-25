@@ -1,0 +1,409 @@
+/* PAGE WRAPPER */
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 20px;
+  min-height: 100vh;
+  background: var(--app-backdrop);
+  font-family: var(--font-sans);
+}
+
+/* MAIN CONTAINER */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  padding: 28px;
+  background: color-mix(in srgb, var(--bg-card) 90%, transparent);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* TOP BAR */
+.topBar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+/* BACK BUTTON */
+.backBtn {
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  background: var(--btn-secondary-hover);
+  color: var(--btn-secondary-text);
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+/* FORM GRID */
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* FORM GROUP */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* FULL WIDTH */
+.full {
+  grid-column: 1 / -1;
+}
+
+/* LABEL */
+.group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* INPUT + TEXTAREA + SELECT */
+.group input,
+.group textarea,
+.group select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* FOCUS */
+.group input:focus,
+.group textarea:focus,
+.group select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--input-bg-focus);
+  box-shadow: var(--focus-ring);
+}
+
+/* READONLY FIELD */
+.readonly {
+  background: var(--surface-disabled) !important;
+  cursor: not-allowed;
+}
+
+/* TEXTAREA */
+.group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ================= DROPDOWN (FIXED) ================= */
+.group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #555 50%),
+                    linear-gradient(135deg, #555 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% - 4px),
+                       calc(100% - 12px) calc(50% - 4px);
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* ================= APPROVAL SECTION ================= */
+.group.full {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+}
+
+.stageCard {
+  gap: 10px;
+}
+
+.stageActionRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stageStatusRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.helperText {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.reasonBox {
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--danger-bg);
+  border: 1px solid color-mix(in srgb, var(--danger-text) 24%, transparent);
+  color: var(--danger-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ================= COMMENT BOX (ANIMATION) ================= */
+.group textarea {
+  transition: all 0.25s ease;
+}
+
+/* ================= BUTTON GROUP ================= */
+.btnGroup {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* COMMON BUTTON */
+.button {
+  padding: 11px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  background: var(--btn-secondary-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+.iconBtn {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--btn-secondary-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: var(--shadow-soft);
+  flex-shrink: 0;
+}
+
+.iconBtn:hover {
+  transform: translateY(-2px);
+  background: var(--btn-secondary-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+/* APPROVE BUTTON */
+.approveBtn {
+  padding: 11px 18px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  background: var(--btn-success-bg);
+  color: var(--btn-success-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.approveBtn:hover {
+  transform: translateY(-2px);
+  background: var(--btn-success-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+/* REJECT BUTTON */
+.rejectBtn {
+  padding: 11px 18px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.rejectBtn:hover {
+  transform: translateY(-2px);
+  background: var(--btn-danger-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+/* DISABLED BUTTON */
+.button:disabled,
+.approveBtn:disabled,
+.rejectBtn:disabled,
+.iconBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ================= MESSAGE ================= */
+.message {
+  background: var(--info-bg);
+  color: var(--info-text);
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* SECTION TITLE */
+.section {
+  margin-top: 25px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+/* ================= TABLE ================= */
+.table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* TABLE HEADER */
+.table th {
+  background: var(--surface-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* TABLE ROW */
+.table td {
+  padding: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* TABLE ROW HOVER */
+.table tr:hover {
+  background: var(--surface-hover);
+}
+
+/* EMPTY STATE */
+.table td[colspan] {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: 1;
+  }
+
+  .btnGroup {
+    flex-direction: column;
+  }
+
+  .stageActionRow {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 14px 8px 24px;
+    min-height: auto;
+  }
+
+  .container {
+    padding: 14px;
+    border-radius: 14px;
+    backdrop-filter: none;
+  }
+
+  .title {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+
+  .form {
+    gap: 14px;
+  }
+
+  .group input,
+  .group textarea,
+  .group select,
+  .backBtn,
+  .button,
+  .approveBtn,
+  .rejectBtn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .stageStatusRow,
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1180px;
+    padding: 34px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    max-width: 1400px;
+    padding: 40px;
+  }
+}

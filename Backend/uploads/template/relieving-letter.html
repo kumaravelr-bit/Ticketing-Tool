@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relieving &amp; Experience Letter</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: #111111;
+        font-family: "Times New Roman", Times, serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      body {
+        font-size: 12pt;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        height: 297mm;
+        margin: 0 auto;
+        padding: 12mm 18mm 0 18mm;
+        position: relative;
+        background: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Watermark */
+      .page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("{{logoBase64}}");
+        background-repeat: no-repeat;
+        background-position: center 48%;
+        background-size: 150mm auto;
+        opacity: 0.098;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Main content grows to push footer down */
+      .content {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── Logo ─────────────────────────────────── */
+      .top-right-logo {
+        position: absolute;
+        top: 8mm;
+        right: 18mm;
+        z-index: 2;
+      }
+
+      .top-right-logo img {
+        width: 100px;
+        height: auto;
+        display: block;
+      }
+
+      /* ── Letter body ──────────────────────────── */
+      .letter-body {
+        flex: 1;
+      }
+
+      .header-title {
+        text-align: center;
+        font-size: 13pt;
+        font-weight: 700;
+        margin-top: 20mm;
+        margin-bottom: 8mm;
+      }
+
+      .sub-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10mm;
+        font-size: 11pt;
+      }
+
+      .document-id {
+        text-align: left;
+        font-weight: 700;
+      }
+
+      .date-row {
+        text-align: right;
+        font-size: 12pt;
+      }
+
+      .date-row .label {
+        font-weight: 400;
+      }
+
+      .date-row .value {
+        font-weight: 700;
+      }
+
+      .to-block {
+        margin-bottom: 4mm;
+      }
+
+      .to-line {
+        font-size: 12pt;
+        font-weight: 700;
+        margin-bottom: 4mm;
+      }
+
+      table.meta {
+        border-collapse: collapse;
+        margin: 0;
+      }
+
+      table.meta td {
+        padding: 0 6px 1px 0;
+        font-size: 12pt;
+        vertical-align: top;
+        line-height: 1.1;
+      }
+
+      table.meta td.label {
+        min-width: 132px;
+        font-weight: 700;
+      }
+
+      table.meta td.sep {
+        width: 14px;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .dear {
+        margin-top: 4mm;
+        margin-bottom: 4mm;
+        font-size: 12pt;
+      }
+
+      .dear .name {
+        font-weight: 700;
+      }
+
+      .para {
+        font-size: 11.6pt;
+        line-height: 1.42;
+        text-align: left;
+        margin: 0 0 5.2mm 0;
+      }
+
+      .bold {
+        font-weight: 700;
+      }
+
+      .closing {
+        margin-top: 2mm;
+        line-height: 1.35;
+        font-size: 11.8pt;
+      }
+
+      .signature-wrap {
+        margin-top: 2mm;
+        margin-bottom: 1mm;
+        min-height: 12mm;
+      }
+
+      .signature-wrap img {
+        width: 120px;
+        height: auto;
+        display: block;
+        margin-left: 2px;
+      }
+
+      .sign-name,
+      .sign-role {
+        font-weight: 700;
+        font-size: 11.8pt;
+        line-height: 1.1;
+      }
+
+      /* ── Footer ───────────────────────────────── */
+      .footer {
+        width: 100%;
+        padding: 0;
+        margin-top: auto;
+        /* sits at the very bottom of the flex column */
+        padding-bottom: 5mm;
+      }
+
+      .footer-inner {
+        /* matches the body left/right padding so lines go edge-to-edge */
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer .company {
+        color: #c0392b;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        margin-bottom: 2.5px;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      .footer .addr-line {
+        font-size: 8.6pt;
+        line-height: 1.45;
+        color: #111111;
+        font-family: "Times New Roman", Times, serif;
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .footer .addr-line .lbl {
+        color: #c0392b;
+        font-weight: 700;
+      }
+
+      /* The dark horizontal rule — spans full content width */
+      .footer .separator {
+        border: none;
+        border-top: 1.5px solid #555555;
+        width: 100%;
+        margin: 4px 0 4px 0;
+        display: block;
+      }
+
+      .footer .iso {
+        font-size: 8.6pt;
+        color: #111111;
+        line-height: 1.4;
+        font-family: "Times New Roman", Times, serif;
+        margin-top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- Top-right logo -->
+      <div class="top-right-logo">
+        <img src="{{logoBase64}}" alt="Infonet Logo" />
+      </div>
+
+      <div class="content">
+        <!-- ── Letter body ──────────────────────── -->
+        <div class="letter-body">
+          <div class="header-title">Relieving &amp; Experience Letter</div>
+
+          <div class="sub-header">
+            <div class="document-id">{{documentId}}</div>
+            <div class="date-row">
+              <span class="label">Date:&nbsp;</span>
+              <span class="value">{{letterDate}}</span>
+            </div>
+          </div>
+
+          <div class="to-block">
+            <div class="to-line">To,</div>
+            <table class="meta">
+              <tr>
+                <td class="label">Employee Name</td>
+                <td class="sep">:</td>
+                <td>{{employeeName}}</td>
+              </tr>
+              <tr>
+                <td class="label">Employee ID</td>
+                <td class="sep">:</td>
+                <td>{{employeeId}}</td>
+              </tr>
+              <tr>
+                <td class="label">Department</td>
+                <td class="sep">:</td>
+                <td>{{department}}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="dear">
+            Dear <span class="name">{{salutationName}}</span>
+          </div>
+
+          <p class="para">
+            This is to formally acknowledge and confirm that your resignation from
+            Infonet Comm Enterprises Pvt. Ltd. has been accepted. You are hereby
+            relieved from your duties with the company effective at the close of
+            working hours on <span class="bold">{{relievingDate}}</span>.
+          </p>
+
+          <p class="para">
+            We would like to place on record our appreciation for the services you
+            have rendered during your tenure with us as
+            <span class="bold">{{designation}}</span> - <span class="bold">{{department}}</span> from
+            <span class="bold">{{dateOfJoining}}</span> to
+            <span class="bold">{{lastWorkingDate}}</span>.
+          </p>
+
+          <p class="para">
+            We confirm that all formalities and handover procedures have been
+            completed to the satisfaction of the management.
+          </p>
+
+          <p class="para">
+            We take this opportunity to thank you for your contributions to the
+            organization and wish you continued success in all your future endeavors.
+          </p>
+
+          <div class="closing">
+            <div>Yours sincerely,</div>
+            <div>For Infonet Comm Enterprises Pvt. Ltd.</div>
+          </div>
+
+          <div class="signature-wrap">
+            <img src="{{signatureBase64}}" alt="Authorised Signature" />
+          </div>
+
+          <div class="sign-name">{{approverName}}</div>
+          <div class="sign-role">{{approverDesignation}}</div>
+        </div>
+        <!-- /letter-body -->
+
+        <!-- ── Footer ──────────────────────────── -->
+        <div class="footer">
+          <div class="footer-inner">
+            <div class="company">INFONET COMM ENTERPRISES PVT LTD</div>
+
+            <div class="addr-line">
+              <span class="lbl">Registered Office :</span>
+              TS.137, TVK Industrial Estate, Ekkattuthangal, Guindy, Chennai-600032.
+            </div>
+
+            <div class="addr-line">
+              <span class="lbl">Head Office :</span>
+              468/10, Balaji Nagar, Tiruchengode Road, Near Collector Office, Namakkal-637003. info@infonetcomm.com, www.infonetcomm.com
+            </div>
+
+            <!-- Dark separator line — matches image exactly -->
+            <hr class="separator" />
+
+            <div class="iso">ISO 9001:2015, ISO 27001: 2013, CIN No: U72200TN1999PTC136457, GST No: 33AACCM8749D1ZH, Customer Care: +91 8100 700 900</div>
+          </div>
+        </div>
+        <!-- /footer -->
+      </div>
+      <!-- /content -->
+    </div>
+  </body>
+</html>

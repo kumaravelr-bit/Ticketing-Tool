@@ -1,0 +1,353 @@
+.container {
+  width: min(100%, 1100px);
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: clamp(16px, 2vw, 24px);
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-sans);
+  color: var(--text-main);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  grid-column: 2;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.primaryBtn {
+  grid-column: 3;
+  justify-self: end;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1px solid transparent;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+.primaryBtn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.primaryBtn:active {
+  transform: scale(0.97);
+}
+
+.message {
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.statCard {
+  background: var(--surface-hover);
+  border: 1px solid var(--border-color);
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+}
+
+.statCard span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.statCard h3 {
+  margin-top: 6px;
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+  min-width: 160px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-primary-soft);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: var(--surface-muted);
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.table td {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border-color);
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.table tbody tr:hover {
+  background: var(--surface-hover);
+  transition: 0.2s ease;
+}
+
+.linkCell {
+  color: var(--accent-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.linkCell:hover {
+  text-decoration: underline;
+  color: var(--accent-primary-strong);
+}
+
+.empty {
+  text-align: center;
+  padding: 20px;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.submitted {
+  background: var(--info-bg);
+  color: var(--info-text);
+}
+
+.approved {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.rejected {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+.progress {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.closed {
+  background: var(--surface-disabled);
+  color: var(--text-secondary);
+}
+
+.pending {
+  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  color: var(--accent-primary);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--btn-secondary-hover);
+  color: var(--btn-secondary-text);
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.resetBtn {
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
+  border: 1px solid transparent;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+}
+
+.resetBtn:hover {
+  background: var(--btn-danger-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1100px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 18px auto;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .title {
+    grid-column: auto;
+  }
+
+  .primaryBtn {
+    grid-column: auto;
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    width: calc(100vw - 12px);
+    margin: 12px auto 20px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .filters input,
+  .filters select,
+  .resetBtn,
+  .primaryBtn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table {
+    min-width: 720px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    width: min(1380px, calc(100vw - 72px));
+    max-width: 1380px;
+    padding: 30px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    width: min(1600px, calc(100vw - 120px));
+    max-width: 1600px;
+    padding: 36px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1200px;
+  }
+}

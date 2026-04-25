@@ -16,4 +16,8 @@ router.get("/requests", auth, controller.getRequests);
 /* DETAIL */
 router.get("/requests/:id", auth, controller.getRequestById);
 
+router.put("/requests/:id", auth, controller.updateManpowerRequest);
+router.put("/requests/:id/:type", auth, controller.updateManpowerAction);
+
+
 module.exports = router;

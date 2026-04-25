@@ -1,0 +1,128 @@
+
+<style>
+  .loader-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    background: transparent;
+  }
+  .loader {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .absolute { position: absolute; }
+  .inline-block { display: inline-block; }
+  .w-2 { width: 4px; }
+  .dash {
+    animation: dashArray 2s ease-in-out infinite, dashOffset 2s linear infinite;
+  }
+  .spin {
+    animation: spinDashArray 2s ease-in-out infinite, spin 8s ease-in-out infinite, dashOffset 2s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes dashArray {
+    0%   { stroke-dasharray: 0 1 359 0; }
+    50%  { stroke-dasharray: 0 359 1 0; }
+    100% { stroke-dasharray: 359 1 0 0; }
+  }
+  @keyframes spinDashArray {
+    0%   { stroke-dasharray: 270 90; }
+    50%  { stroke-dasharray: 0 360; }
+    100% { stroke-dasharray: 270 90; }
+  }
+  @keyframes dashOffset {
+    0%   { stroke-dashoffset: 365; }
+    100% { stroke-dashoffset: 5; }
+  }
+  @keyframes spin {
+    0%            { rotate: 0deg; }
+    12.5%, 25%    { rotate: 270deg; }
+    37.5%, 50%    { rotate: 540deg; }
+    62.5%, 75%    { rotate: 810deg; }
+    87.5%, 100%   { rotate: 1080deg; }
+  }
+</style>
+
+<div class="loader-wrap">
+  <div class="loader">
+
+    <svg height="0" width="0" viewBox="0 0 64 64" class="absolute">
+      <defs xmlns="http://www.w3.org/2000/svg">
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g1">
+          <stop stop-color="#973BED"></stop>
+          <stop stop-color="#007CFF" offset="1"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="0" x2="0" y1="64" x1="0" id="g2">
+          <stop stop-color="#FFC800"></stop>
+          <stop stop-color="#FF00FF" offset="1"></stop>
+          <animateTransform repeatCount="indefinite" keySplines=".42,0,.58,1;.42,0,.58,1;.42,0,.58,1;.42,0,.58,1;.42,0,.58,1;.42,0,.58,1;.42,0,.58,1;.42,0,.58,1" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="8s" values="0 32 32;-270 32 32;-270 32 32;-540 32 32;-540 32 32;-810 32 32;-810 32 32;-1080 32 32;-1080 32 32" type="rotate" attributeName="gradientTransform"></animateTransform>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g3">
+          <stop stop-color="#00E0ED"></stop>
+          <stop stop-color="#00DA72" offset="1"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g4">
+          <stop stop-color="#FF6B6B"></stop>
+          <stop stop-color="#FFE66D" offset="1"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g5">
+          <stop stop-color="#A8EDEA"></stop>
+          <stop stop-color="#FED6E3" offset="1"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g6">
+          <stop stop-color="#F953C6"></stop>
+          <stop stop-color="#B91D73" offset="1"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="g7">
+          <stop stop-color="#43E97B"></stop>
+          <stop stop-color="#38F9D7" offset="1"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+
+<!-- I -->
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="42" class="inline-block" style="margin-right:-12px;">
+  <path stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="url(#g1)"
+    d="M 32,-4 V 70" class="dash" pathLength="360"></path>
+</svg>
+
+    <!-- N -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="56" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="8" stroke="url(#g2)"
+        d="M 8,60 V 4 L 56,60 V 4" class="dash" pathLength="360"></path>
+    </svg>
+
+    <!-- F -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="52" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="8" stroke="url(#g3)"
+        d="M 52,4 H 8 V 60 M 8,34 H 46" class="dash" pathLength="360"></path>
+    </svg>
+
+    <!-- O -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" style="--rotation-duration:0ms;--rotation-direction:normal;" viewBox="0 0 64 64" height="64" width="64" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="url(#g4)"
+        d="M 32 32 m 0 -26 a 26 26 0 1 1 0 52 a 26 26 0 1 1 0 -52" class="spin" pathLength="360"></path>
+    </svg>
+
+    <!-- N -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="56" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="8" stroke="url(#g5)"
+        d="M 8,60 V 4 L 56,60 V 4" class="dash" pathLength="360"></path>
+    </svg>
+
+    <!-- E -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="52" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="8" stroke="url(#g6)"
+        d="M 52,4 H 8 V 60 H 52 M 8,32 H 46" class="dash" pathLength="360"></path>
+    </svg>
+
+    <!-- T -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" height="64" width="52" class="inline-block">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="8" stroke="url(#g7)"
+        d="M 4,4 H 60 M 32,4 V 60" class="dash" pathLength="360"></path>
+    </svg>
+
+  </div>
+</div>

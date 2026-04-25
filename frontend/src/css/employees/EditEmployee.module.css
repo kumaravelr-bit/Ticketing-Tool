@@ -1,0 +1,283 @@
+.employeeEditContainer {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 28px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+}
+
+.employeeEditContainer h2 {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.formRow label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.formRow input,
+.formRow select,
+.formRow textarea {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.formRow textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.formRow input:focus,
+.formRow select:focus,
+.formRow textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-primary-soft);
+}
+
+.formRow input:disabled,
+.formRow select:disabled,
+.formRow textarea:disabled {
+  background: var(--surface-disabled);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.formRow select[multiple] {
+  min-height: 120px;
+}
+
+.formRow select option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+}
+
+.multiSelect {
+  min-height: 140px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px;
+  background: var(--bg-card);
+}
+
+.multiSelect option:checked {
+  background: var(--selected-bg) !important;
+  color: var(--selected-text) !important;
+  box-shadow: inset 0 0 0 1px var(--selected-border);
+  font-weight: 600;
+}
+
+.multiSelect option:hover {
+  background: var(--surface-hover);
+}
+
+.btnBack,
+.btnEdit {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnBack {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.btnBack:hover {
+  background: var(--surface-muted);
+}
+
+.btnEdit {
+  border: 1px solid transparent;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-weight: 700;
+}
+
+.btnPrimary {
+  margin-top: 20px;
+  padding: 12px 0;
+  width: 100%;
+  background: var(--btn-primary-bg);
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: var(--btn-primary-text);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btnPrimary:hover,
+.btnEdit:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.viewGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.readOnlyField {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 14px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.inlineFields {
+  display: flex;
+  gap: 10px;
+}
+
+.photoWrap {
+  margin-bottom: 10px;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+.profilePreview {
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+}
+
+.profileFallback {
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.photoActions {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+.iconBtn {
+  cursor: pointer;
+  border: none;
+  background: var(--surface-muted);
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--text-main);
+}
+
+.dangerIconBtn {
+  background: color-mix(in srgb, var(--danger-text) 12%, white);
+  color: var(--danger-text);
+}
+
+.selectionText {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.passwordWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.passwordInput {
+  flex: 1;
+}
+
+.passwordToggle {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--accent-primary);
+}
+
+.passwordHint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.passwordErrorText {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--danger-text);
+}
+
+.passwordError {
+  border-color: var(--danger-text) !important;
+}
+
+.passwordSuccess {
+  border-color: var(--success-text) !important;
+}
+
+@media (max-width: 768px) {
+  .employeeEditContainer {
+    margin: 20px 14px;
+    padding: 22px;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inlineFields,
+  .passwordWrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,185 @@
+.container {
+  width: min(100%, 1100px);
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: clamp(16px, 2vw, 24px);
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(420px, calc(100vw - 24px));
+  transform: translate(-50%, -50%);
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.modalInput,
+.modalSelect,
+.modalTextarea {
+  padding: 9px 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modalTextarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modalButtonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.confirmButton {
+  background: var(--btn-primary-bg);
+  border: 1px solid transparent;
+  color: var(--btn-primary-text);
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.cancelButton {
+  background: var(--btn-danger-bg);
+  border: 1px solid transparent;
+  color: var(--btn-danger-text);
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.confirmButton:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+.cancelButton:hover {
+  background: var(--btn-danger-hover);
+  transform: translateY(-1px);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background: var(--btn-secondary-bg);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--btn-secondary-text);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--btn-secondary-hover);
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+.pagination select {
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: 18px auto;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+    margin: 14px auto;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .modal {
+    padding: 18px 16px;
+  }
+
+  .modalButtonGroup {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    max-width: 1280px;
+  }
+}

@@ -1,0 +1,477 @@
+.pageShell {
+  width: 100%;
+  min-height: calc(100vh - 2rem);
+  padding: clamp(14px, 1.8vw, 28px);
+}
+
+.pageCard {
+  width: min(100%, 900px);
+  margin: 32px auto;
+  padding: 28px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+}
+
+.pageHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.headerTitle {
+  min-width: 0;
+  text-align: center;
+}
+
+.headerEyebrow {
+  display: none;
+}
+
+.headerTitle h1,
+.headerTitle h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.95rem);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+}
+
+.headerTitle p {
+  display: none;
+}
+
+.headerActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.headerSpacer {
+  min-width: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-color);
+}
+
+.sectionCard {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.sectionTitle {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-main);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.gridTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gridThree {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.spanFull {
+  grid-column: 1 / -1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label,
+.blockLabel {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input,
+.select {
+  min-height: 44px;
+}
+
+.textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-primary-soft);
+  background: var(--input-bg-focus, var(--bg-card));
+}
+
+.input:disabled,
+.textarea:disabled,
+.select:disabled,
+.input[readonly],
+.textarea[readonly] {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.inputError {
+  border-color: color-mix(in srgb, var(--btn-danger-bg) 70%, transparent);
+}
+
+.error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--btn-danger-bg);
+}
+
+.segmentedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.segmentedBlock + .segmentedBlock {
+  margin-top: 16px;
+}
+
+.segmentedGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.segmentedButton {
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.segmentedButton:hover {
+  transform: translateY(-1px);
+  background: var(--surface-hover);
+}
+
+.segmentedButtonActive {
+  background: var(--btn-primary-bg);
+  border-color: transparent;
+  color: var(--btn-primary-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.segmentedButton:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.searchableField {
+  position: relative;
+}
+
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: min(260px, 40vh);
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.searchOption,
+.searchEmpty {
+  width: 100%;
+  padding: 11px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.searchOption {
+  cursor: pointer;
+}
+
+.searchOption:hover,
+.searchOptionSelected {
+  background: var(--surface-hover);
+}
+
+.mapField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mapInputWrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.mapInput {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.mapToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  border: 0;
+  border-left: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mapToggle:hover:not(:disabled) {
+  background: var(--btn-secondary-hover);
+}
+
+.mapToggle:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.mapHelperRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mapHelperText {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.mapBadge,
+.mapMetaTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mapPreview,
+.mapPlaceholder {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.mapPreview iframe {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 30vw, 380px);
+  border: 0;
+}
+
+.mapMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  font-size: 12px;
+}
+
+.mapPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 92px;
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.emptyState {
+  width: min(100%, 900px);
+  margin: 32px auto;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.buttonPrimary,
+.buttonSecondary,
+.buttonGhost {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.buttonPrimary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.buttonPrimary:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+.buttonSecondary {
+  background: var(--surface-muted);
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.buttonSecondary:hover,
+.buttonGhost:hover {
+  background: var(--btn-secondary-hover);
+  transform: translateY(-1px);
+}
+
+.buttonGhost {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.buttonPrimary:disabled,
+.buttonSecondary:disabled,
+.buttonGhost:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .pageHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .headerTitle {
+    text-align: left;
+  }
+
+  .gridTwo,
+  .gridThree {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageCard {
+    margin: 0 auto;
+    padding: 18px 16px;
+  }
+
+  .sectionCard {
+    padding: 14px;
+  }
+
+  .formFooter {
+    flex-direction: column;
+  }
+
+  .formFooter > * {
+    width: 100%;
+  }
+
+  .segmentedButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 2200px) {
+  .pageCard {
+    max-width: 1040px;
+  }
+}

@@ -30,3 +30,41 @@ export const previewOfferLetter = async (id) => {
 // ✅ Send Mail
 export const sendOfferLetterMail = (data) =>
   api.post("/offer-letter/send-mail", data);
+
+/* =========================
+   RELIEVING LETTER
+========================= */
+
+export const getRelievingEmployees = (params = {}) =>
+  api.get("/relieving/dashboard", { params });
+
+export const getRelievingCandidates = (params = {}) =>
+  api.get("/relieving/candidates", { params });
+
+export const createRelievingLetter = (payload) =>
+  api.post("/relieving/generate", payload);
+
+export const getRelievingLetterById = (id) =>
+  api.get(`/relieving/${id}`);
+
+export const updateRelievingLetter = (id, payload) =>
+  api.put(`/relieving/${id}`, payload);
+
+export const previewRelievingLetter = (id) =>
+  api.get(`/relieving/preview/${id}`, {
+    responseType: "blob",
+  });
+
+export const downloadRelievingLetter = (id) =>
+  api.get(`/relieving/download/${id}`, {
+    responseType: "blob",
+  });
+
+export const sendRelievingLetterMail = (payload) =>
+  api.post("/relieving/send-mail", payload);
+
+export const approveRelievingLetter = (id, payload) =>
+  api.post(`/relieving/${id}/approve`, payload);
+
+export const rejectRelievingLetter = (id, payload) =>
+  api.post(`/relieving/${id}/reject`, payload);

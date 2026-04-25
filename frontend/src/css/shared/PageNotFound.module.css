@@ -1,0 +1,86 @@
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+  /* height: 100vh; */
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.contentWrapper {
+  text-align: center;
+}
+
+/* GIF CONTAINER */
+.four_zero_four_bg {
+  background-image: url("../../assets/bg.gif");
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;   /* 🔥 keep top */
+  justify-content: center;
+}
+
+/* 🔥 404 TEXT */
+.four_zero_four_bg h1 {
+  font-size: 90px;
+  margin-top: 20px;          /* 🔥 push slightly down from top */
+
+  color: #ff7a00;            /* 🔥 MATCH GIF ORANGE TONE */
+  letter-spacing: 5px;
+
+  /* 🔥 ANIMATION */
+  animation: bounceGlow 1.5s infinite ease-in-out;
+}
+
+/* 🔥 ANIMATION KEYFRAMES */
+@keyframes bounceGlow {
+  0% {
+    transform: translateY(0);
+    text-shadow: 0 0 5px rgba(255,122,0,0.3);
+  }
+  50% {
+    transform: translateY(-10px);
+    text-shadow: 0 0 20px rgba(255,122,0,0.8);
+  }
+  100% {
+    transform: translateY(0);
+    text-shadow: 0 0 5px rgba(255,122,0,0.3);
+  }
+}
+
+.contant_box_404 {
+  margin-top: -20px;
+}
+
+.contant_box_404 h3 {
+  font-size: 28px;
+}
+
+.contant_box_404 p {
+  font-size: 16px;
+  color: #555;
+}
+
+.link_404 {
+  color: #fff;
+  padding: 12px 25px;
+  background: #39ac31;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.link_404:hover {
+  background: #2e8b28;
+}

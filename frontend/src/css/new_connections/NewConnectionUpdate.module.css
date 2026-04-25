@@ -1,0 +1,11 @@
+.shellAccent {
+  background: var(--app-backdrop);
+}
+
+.pageAccent {
+  border-color: var(--border-color);
+}
+
+.headerAccent {
+  background: transparent;
+}

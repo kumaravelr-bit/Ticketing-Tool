@@ -1,0 +1,173 @@
+
+<style>
+  :root {
+    --c1: #6B21A8;
+    --c2: #A21CAF;
+    --c3: #DB2777;
+    --c4: #F43F5E;
+    --c5: #EF4444;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --c1: #C084FC;
+      --c2: #E879F9;
+      --c3: #F472B6;
+      --c4: #FB7185;
+      --c5: #FCA5A5;
+    }
+  }
+
+  .scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem;
+    gap: 2rem;
+  }
+
+  .wifi-loader {
+    position: relative;
+    width: 160px;
+    height: 148px;
+  }
+
+  .wifi-loader svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: visible;
+  }
+
+  @keyframes sweep-arc1 {
+    0%   { stroke-dashoffset: 310; opacity: 0.15; }
+    10%  { opacity: 0.15; }
+    35%  { stroke-dashoffset: 0; opacity: 1; }
+    60%  { stroke-dashoffset: 0; opacity: 1; }
+    80%  { stroke-dashoffset: 0; opacity: 0.15; }
+    100% { stroke-dashoffset: 310; opacity: 0.15; }
+  }
+  @keyframes sweep-arc2 {
+    0%   { stroke-dashoffset: 210; opacity: 0.15; }
+    15%  { stroke-dashoffset: 210; opacity: 0.15; }
+    20%  { opacity: 0.15; }
+    45%  { stroke-dashoffset: 0; opacity: 1; }
+    65%  { stroke-dashoffset: 0; opacity: 1; }
+    83%  { stroke-dashoffset: 0; opacity: 0.15; }
+    100% { stroke-dashoffset: 210; opacity: 0.15; }
+  }
+  @keyframes sweep-arc3 {
+    0%   { stroke-dashoffset: 125; opacity: 0.15; }
+    25%  { stroke-dashoffset: 125; opacity: 0.15; }
+    30%  { opacity: 0.15; }
+    55%  { stroke-dashoffset: 0; opacity: 1; }
+    72%  { stroke-dashoffset: 0; opacity: 1; }
+    88%  { stroke-dashoffset: 0; opacity: 0.15; }
+    100% { stroke-dashoffset: 125; opacity: 0.15; }
+  }
+  @keyframes dot-breathe {
+    0%   { transform: scale(0.7); opacity: 0.2; }
+    40%  { transform: scale(0.7); opacity: 0.2; }
+    65%  { transform: scale(1.15); opacity: 1; }
+    80%  { transform: scale(1); opacity: 1; }
+    90%  { transform: scale(1); opacity: 0.2; }
+    100% { transform: scale(0.7); opacity: 0.2; }
+  }
+
+  .arc1 {
+    stroke-dasharray: 310;
+    stroke-dashoffset: 310;
+    animation: sweep-arc1 2.4s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .arc2 {
+    stroke-dasharray: 210;
+    stroke-dashoffset: 210;
+    animation: sweep-arc2 2.4s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .arc3 {
+    stroke-dasharray: 125;
+    stroke-dashoffset: 125;
+    animation: sweep-arc3 2.4s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .dot-group {
+    transform-origin: 80px 133px;
+    animation: dot-breathe 2.4s cubic-bezier(.4,0,.2,1) infinite;
+  }
+
+  .status-text {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .dots-anim::after {
+    content: '';
+    animation: dotdot 1.6s steps(4, end) infinite;
+  }
+  @keyframes dotdot {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: ''; }
+  }
+</style>
+
+<div class="scene">
+  <div class="wifi-loader">
+    <svg viewBox="0 0 160 148" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <defs>
+        <linearGradient id="ga1" x1="10" y1="14" x2="150" y2="14" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="var(--c1)"/>
+          <stop offset="55%" stop-color="var(--c3)"/>
+          <stop offset="100%" stop-color="var(--c5)"/>
+        </linearGradient>
+        <linearGradient id="ga2" x1="28" y1="60" x2="134" y2="60" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="var(--c2)"/>
+          <stop offset="50%" stop-color="var(--c3)"/>
+          <stop offset="100%" stop-color="var(--c5)"/>
+        </linearGradient>
+        <linearGradient id="ga3" x1="52" y1="96" x2="110" y2="96" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="var(--c2)"/>
+          <stop offset="100%" stop-color="var(--c4)"/>
+        </linearGradient>
+        <linearGradient id="ga4" x1="66" y1="115" x2="94" y2="148" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="var(--c1)"/>
+          <stop offset="100%" stop-color="var(--c3)"/>
+        </linearGradient>
+      </defs>
+
+      <path
+        class="arc1"
+        d="M 11,72 A 73,73 0 0 1 149,72"
+        stroke="url(#ga1)"
+        stroke-width="13"
+        stroke-linecap="round"
+      />
+
+      <path
+        class="arc2"
+        d="M 30,80 A 52,52 0 0 1 130,80"
+        stroke="url(#ga2)"
+        stroke-width="12"
+        stroke-linecap="round"
+      />
+
+      <path
+        class="arc3"
+        d="M 53,91 A 29,29 0 0 1 107,91"
+        stroke="url(#ga3)"
+        stroke-width="11"
+        stroke-linecap="round"
+      />
+
+      <g class="dot-group">
+        <circle cx="80" cy="133" r="12" fill="url(#ga4)"/>
+        <circle cx="80" cy="133" r="6" fill="white" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+
+  <span class="status-text dots-anim">Connecting</span>
+</div>
